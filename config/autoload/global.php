@@ -199,8 +199,8 @@ return array(
     'zfcuser' => $settings,
     'db' => array(
     		'driver'		 => 'Pdo',
-    		//'dsn'			 => 'mysql:dbname=portal;host=localhost',
-                'dsn'			 => 'sqlsrv:database=portal;server=10.0.0.102',
+    		'dsn'			 => 'mysql:dbname=zf2tutorial;host=localhost',
+                //'dsn'			 => 'sqlsrv:database=portal;server=10.0.0.102',
     		'driver_options' => array(
     				PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'',
     		),
