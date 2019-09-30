@@ -1,5 +1,5 @@
 <?php
-namespace Album;
+namespace Cadastro;
 
 return array(
     'controllers' => array(

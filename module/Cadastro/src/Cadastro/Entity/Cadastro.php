@@ -20,7 +20,7 @@ use Zend\InputFilter\InputFilterInterface;
  * @property string $razaosocial
  * @property int $id
  */
-class Album implements InputFilterAwareInterface 
+class Cadastro implements InputFilterAwareInterface 
 {
     protected $inputFilter;
     

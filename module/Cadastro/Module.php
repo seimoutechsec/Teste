@@ -1,5 +1,5 @@
 <?php
-namespace Album;
+namespace Cadastro;
 
 use Cadastro\Model\Cadastro;
 use Cadastro\Model\CadastroTable;
@@ -33,7 +33,7 @@ class Module
                 'CadastroTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Album());
+                    $resultSetPrototype->setArrayObjectPrototype(new \Cadastro());
                 
                     return new TableGateway('cadastro', $dbAdapter, null, $resultSetPrototype);
                 },
