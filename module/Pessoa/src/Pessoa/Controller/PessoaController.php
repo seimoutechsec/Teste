@@ -1,14 +1,14 @@
 <?php
  
-namespace Cadastro\Controller;
+namespace Pessoa\Controller;
  
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Cadastro\Entity\Cadastro;
-use Cadastro\Form\CadastroForm;
+use Pessoa\Entity\Pessoa;
+use Pessoa\Form\PessoaForm;
 use Doctrine\ORM\EntityManager;
  
-class CadastroController extends AbstractActionController
+class PessoaController extends AbstractActionController
 {
     protected $em;
  
@@ -23,32 +23,32 @@ class CadastroController extends AbstractActionController
  
     public function indexAction()
     {        
-        return new ViewModel(array(
-            'pessoas' => $this->getEntityManager()->getRepository('\Cadastro\Entity\Cadastro')->findAll(),
+        return new ViewModel(array(            
+            'pessoas' => $this->getEntityManager()->getRepository('\Pessoa\Entity\Pessoa')->findAll(),                     
         ));
     }
  
     public function addAction()
     {
-        $form = new CadastroForm();
+        $form = new PessoaForm();
         $form->get('submit')->setValue('Add');
  
         $request = $this->getRequest();
 
         if ($request->isPost()) 
         {
-            $cadastro = new Album();
-            $form->setInputFilter($cadastro->getInputFilter());
+            $pessoa = new Pessoa();
+            $form->setInputFilter($pessoa->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) 
             {
-                $cadastro->exchangeArray($form->getData());
-                $this->getEntityManager()->persist($cadastro);
+                $pessoa->exchangeArray($form->getData());
+                $this->getEntityManager()->persist($pessoa);
                 $this->getEntityManager()->flush();
  
-                // Redirect to list of albums
-                return $this->redirect()->toRoute('cadastro');
+                // Redirect to list of pessoas
+                return $this->redirect()->toRoute('pessoa');
             }
         }
 
@@ -61,37 +61,37 @@ class CadastroController extends AbstractActionController
         
         if (!$id) 
         {
-            return $this->redirect()->toRoute('cadastro', array(
+            return $this->redirect()->toRoute('pessoa', array(
                 'action' => 'add'
             ));
         }
  
-        $album = $this->getEntityManager()->find('Cadastro\Entity\Cadastro', $id);
+        $pessoa = $this->getEntityManager()->find('Pessoa\Entity\Pesssoa', $id);
         
-        if (!$cadastro) 
+        if (!$pessoa) 
         {
-            return $this->redirect()->toRoute('cadastro', array(
+            return $this->redirect()->toRoute('pessoa', array(
                 'action' => 'index'
             ));
         }
  
-        $form  = new CadastroForm();
-        $form->bind($cadastro);
+        $form  = new PessoaForm();
+        $form->bind($pessoa);
         $form->get('submit')->setAttribute('value', 'Edit');
  
         $request = $this->getRequest();
 
         if ($request->isPost()) 
         {
-            $form->setInputFilter($cadastro->getInputFilter());
+            $form->setInputFilter($pessoa->getInputFilter());
             $form->setData($request->getPost());
  
             if ($form->isValid()) 
             {
                 $this->getEntityManager()->flush();
  
-                // Redirect to list of albums
-                return $this->redirect()->toRoute('cadastro');
+                // Redirect to list of pessoas
+                return $this->redirect()->toRoute('pessoa');
             }
         }
  
@@ -107,7 +107,7 @@ class CadastroController extends AbstractActionController
 
         if (!$id) 
         {
-            return $this->redirect()->toRoute('cadastro');
+            return $this->redirect()->toRoute('pessoa');
         }
  
         $request = $this->getRequest();
@@ -119,22 +119,22 @@ class CadastroController extends AbstractActionController
             if ($del == 'Yes') 
             {
                 $id = (int) $request->getPost('id');
-                $cadastro = $this->getEntityManager()->find('Cadastro\Entity\Cadastro', $id);
+                $pessoa = $this->getEntityManager()->find('Pessoa\Entity\Pessoa', $id);
                 
-                if ($cadastro) 
+                if ($pessoa) 
                 {
-                    $this->getEntityManager()->remove($cadastro);
+                    $this->getEntityManager()->remove($pessoa);
                     $this->getEntityManager()->flush();
                 }
             }
  
             // Redirect to list of albums
-            return $this->redirect()->toRoute('cadastro');
+            return $this->redirect()->toRoute('pessoa');
         }
  
         return array(
             'id'    => $id,
-            'cadastro' => $this->getEntityManager()->find('Cadastro\Entity\Cadastro', $id)
+            'pessoas' => $this->getEntityManager()->find('Pessoa\Entity\Pessoa', $id)
         );
     }
 }

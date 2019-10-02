@@ -1,8 +1,8 @@
 <?php
-namespace Cadastro;
+namespace Pessoa;
 
-use Cadastro\Model\Cadastro;
-use Cadastro\Model\CadastroTable;
+use Pessoa\Model\Pessoa;
+use Pessoa\Model\PessoaTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
@@ -23,19 +23,19 @@ class Module
     {
         return array(
             'factories' => array(
-                'Cadastro\Model\CadastroTable' => function($sm) 
+                'Pessoa\Model\PessoaTable' => function($sm) 
                 {
-                    $tableGateway = $sm->get('CadastroTableGateway');
-                    $table = new CadastroTable($tableGateway);
+                    $tableGateway = $sm->get('PessoaTableGateway');
+                    $table = new \PessoaTable($tableGateway);
                     return $table;
                 },
                     
-                'CadastroTableGateway' => function ($sm) {
+                'PessoaTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new \Cadastro());
+                    $resultSetPrototype->setArrayObjectPrototype(new Pessoa());
                 
-                    return new TableGateway('cadastro', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('pessoa', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );

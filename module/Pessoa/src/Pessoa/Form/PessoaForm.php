@@ -1,13 +1,13 @@
 <?php
-namespace Cadastro\Form;
+namespace Pessoa\Form;
 
 use Zend\Form\Form;
 
-class CadastroForm extends Form
+class PessoaForm extends Form
 {
     public function __construct($name = null)
     {        
-        parent::__construct('cadastro');
+        parent::__construct('pessoa');
         
         $this->setAttribute('method', 'post');
         $this->add(array(

@@ -1,9 +1,9 @@
 <?php
-namespace Cadastro\Model;
+namespace Pessoa\Model;
 
 use Zend\Db\TableGateway\TableGateway;
 
-class CadastroTable
+class PessoaTable
 {
     protected $tableGateway;
     
@@ -18,7 +18,7 @@ class CadastroTable
         return $resultSet;
     }
     
-    public function getCadastro($id)
+    public function getPessoa($id)
     {
         $id = (int) $id;
         $rowset = $this->tableGateway->select(array('id' => $id));
@@ -32,17 +32,17 @@ class CadastroTable
         return $row;
     }
     
-    public function saveCadastro(Cadastro $cadastro)
+    public function savePessoa(Pessoa $pessoa)
     {
         $data = array(
-                    'id_estado_civil' => $cadastro->id_estado_civil,
-                    'email' => $cadastro->email,
-                    'telefone' => $cadastro->telefone,
-                    'nome_fantasia' => $cadastro->nome_fantasia,
-                    'razaosocial' => $cadastro->razaosocial,
+                    'id_estado_civil' => $pessoa->id_estado_civil,
+                    'email' => $pessoa->email,
+                    'telefone' => $pessoa->telefone,
+                    'nome_fantasia' => $pessoa->nome_fantasia,
+                    'razaosocial' => $pessoa->razaosocial,
                 );
         
-        $id = (int)$cadastro->id;
+        $id = (int)$pessoa->id;
         
         if ($id == 0) 
         {
@@ -50,7 +50,7 @@ class CadastroTable
         } 
         else 
         {
-            if ($this->getCadastro($id)) 
+            if ($this->getpessoa($id)) 
             {
                 $this->tableGateway->update($data, array('id' => $id));
             } 
@@ -61,7 +61,7 @@ class CadastroTable
         }
     }
     
-    public function deleteCadastro($id)
+    public function deletePessoa($id)
     {
         $this->tableGateway->delete(array('id' => $id));
     }

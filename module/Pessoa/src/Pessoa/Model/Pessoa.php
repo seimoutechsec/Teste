@@ -1,12 +1,12 @@
 <?php
-namespace Cadastro\Model;
+namespace Pessoa\Model;
 
 use Zend\InputFilter\Factory as InputFactory; 
 use Zend\InputFilter\InputFilter; 
 use Zend\InputFilter\InputFilterAwareInterface; 
 use Zend\InputFilter\InputFilterInterface; 
 
-class Cadastro
+class Pessoa
 {
     public $id;
     public $id_estado_civil;

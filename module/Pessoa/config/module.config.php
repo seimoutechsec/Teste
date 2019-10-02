@@ -1,29 +1,29 @@
 <?php
-namespace Cadastro;
+namespace Pessoa;
 
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Cadastro\Controller\Cadastro' => 'Cadastro\Controller\CadastroController',
+            'Pessoa\Controller\Pessoa' => 'Pessoa\Controller\PessoaController',
         ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-            'cadastro' => __DIR__ . '/../view',
+            'pessoa' => __DIR__ . '/../view',
         ),
     ),
     'router' => array(
         'routes' => array(
-            'cadastro' => array(
+            'pessoa' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/cadastro[/:action][/:id]',
+                    'route' => '/pessoa[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id' => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Cadastro\Controller\Cadastro',
+                        'controller' => 'Pessoa\Controller\Pessoa',
                         'action' => 'index',
                     ),
                 ),

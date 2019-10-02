@@ -1,0 +1,65 @@
+<?php
+$title = 'Pessoas';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>
+    <a href="<?php echo $this->url('pessoa', array('action'=>'add'));?>">Cadastra Nova Pessoa</a>
+</p>
+
+<table class="table">
+<tr>
+    <th>Razão Social</th>
+    <th>Nome Fantasia</th>
+    <th>Telefone</th>
+    <th>E-mail</th>
+    <th>Estado Civil</th>
+    <th>RG</th>
+    <th>CPF</th>
+    <th>CNPJ</th>
+    <th>Tipo</th>
+    <th>&nbsp;</th>
+</tr>
+    
+<?php foreach ($pessoas as $pessoa) : ?>
+    <tr>
+        <td><?php echo $this->escapeHtml($pessoa->razaosocial);?></td>
+        <td><?php echo $this->escapeHtml($pessoa->nome_fantasia);?></td>
+        <td><?php echo $this->escapeHtml($pessoa->telefone);?></td>
+        <td><?php echo $this->escapeHtml($pessoa->email);?></td>        
+        <?php         
+        switch ($pessoa->id_estado_civil){
+            case 1: ?>
+                <td>Solteiro</td>
+            <?php break; 
+            case 2: ?>
+                <td>Casado</td>
+            <?php break; 
+            case 3: ?>
+                <td>Divorciado</td>
+            <?php break; 
+            case 4: ?>
+                <td>Convivente</td>
+            <?php break; 
+            case 5: ?>
+                <td>Enrolado</td>
+            <?php break; 
+            default: ?>
+                <td></td>
+            <?php break;
+        }  ?>        
+        <td><?php echo $this->escapeHtml($pessoa->rg);?></td>
+        <td><?php echo $this->escapeHtml($pessoa->cpf);?></td>
+        <td><?php echo $this->escapeHtml($pessoa->cnpj);?></td>
+        <?php if($pessoa->situacao == 0) { ?>
+            <td><?php echo $this->escapeHtml("Física");?></td>
+        <?php } else { ?>
+            <td><?php echo $this->escapeHtml("Jurídica");?></td>
+        <?php } ?>
+        <td><a href="<?php echo $this->url('pessoa', array('action'=>'edit', 'id' => $pessoa->id));?>">Edit</a>
+            <a href="<?php echo $this->url('pessoa', array('action'=>'delete', 'id' => $pessoa->id));?>">Delete</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>
